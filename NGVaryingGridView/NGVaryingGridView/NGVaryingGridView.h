@@ -23,6 +23,7 @@
 
 @optional
 - (void)gridView:(NGVaryingGridView *)gridView didSelectCell:(UIView *)cell index:(NSUInteger)index;
+- (void)gridView:(NGVaryingGridView *)gridView willPrepareCellForReuse:(UIView *)cell;
 
 @end 
 
@@ -57,7 +58,6 @@
  @param animated `YES` if you want to animate the change in position, `NO` if it should be immediate.
  */
 - (void)scrollToGridCell:(UIView *)cell animated:(BOOL)animated;
-
 
 /**
  Adds an Overlay to the GridView. The `UIView` will not be inside the scrollable Area, but above it
