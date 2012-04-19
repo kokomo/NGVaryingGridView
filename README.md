@@ -4,6 +4,10 @@
 
 A GridView which allows to set individual Rects for the Cells. So you can define Cells with different Sizes, used e.g. in Timetables, EPGs, etc.
 
+Sticky Views are also supported on top of the GridView and on the left side.
+
+-><img src="http://office.nousguide.com/github/NGVaryingGridView.png" alt="NGVaryingGridView" title="NGVaryingGridView" title" style="display:block; margin:20px;" class="center"><-
+
 
 
 ## Usage
@@ -12,6 +16,8 @@ A GridView which allows to set individual Rects for the Cells. So you can define
 self.gridView = [[NGVaryingGridView alloc] initWithFrame:self.view.bounds];
 self.gridView.gridViewDelegate = self;
 [self.view addSubview:self.gridView];
+
+[self.gridView reloadData];
 ```
 
 The following Delegate-Methods are required:
@@ -37,6 +43,8 @@ The following Delegate-Methods are required:
 	return gridCell
 }
 ```
+
+Just have a look inside the provided Demo-Application.
 
 ## Credits
 

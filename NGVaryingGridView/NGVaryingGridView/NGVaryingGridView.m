@@ -85,6 +85,7 @@
     [super layoutSubviews];
     
     [self loadCellsInRect:self.visibleRect];
+    [self updateStickyViewsPosition];
     [self bringScrollingIndicatorsToFront];
 }
 

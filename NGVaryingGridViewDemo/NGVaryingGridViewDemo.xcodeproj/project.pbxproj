@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6ABB7F37154080A700334EF3 /* libNGVaryingGridView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABB7F2A1540808800334EF3 /* libNGVaryingGridView.a */; };
+		6ABB7F61154096F000334EF3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABB7F60154096F000334EF3 /* QuartzCore.framework */; };
+		6ABB7F64154099D900334EF3 /* NGTimeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABB7F63154099D900334EF3 /* NGTimeTableCell.m */; };
+		6AFFF67D15407F7800AA8C77 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFFF67C15407F7800AA8C77 /* UIKit.framework */; };
+		6AFFF67F15407F7800AA8C77 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFFF67E15407F7800AA8C77 /* Foundation.framework */; };
+		6AFFF68115407F7800AA8C77 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFFF68015407F7800AA8C77 /* CoreGraphics.framework */; };
+		6AFFF68715407F7800AA8C77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AFFF68515407F7800AA8C77 /* InfoPlist.strings */; };
+		6AFFF68915407F7800AA8C77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFFF68815407F7800AA8C77 /* main.m */; };
+		6AFFF68D15407F7800AA8C77 /* NGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFFF68C15407F7800AA8C77 /* NGAppDelegate.m */; };
+		6AFFF69015407F7800AA8C77 /* NGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFFF68F15407F7800AA8C77 /* NGViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6ABB7F291540808800334EF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ABB7F251540808800334EF3 /* NGVaryingGridView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6A5A96A7153FFDF2004EA62B;
+			remoteInfo = NGVaryingGridView;
+		};
+		6ABB7F35154080A300334EF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6ABB7F251540808800334EF3 /* NGVaryingGridView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A5A96A6153FFDF2004EA62B;
+			remoteInfo = NGVaryingGridView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6ABB7F251540808800334EF3 /* NGVaryingGridView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NGVaryingGridView.xcodeproj; path = ../NGVaryingGridView/NGVaryingGridView.xcodeproj; sourceTree = "<group>"; };
+		6ABB7F60154096F000334EF3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6ABB7F62154099D900334EF3 /* NGTimeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGTimeTableCell.h; sourceTree = "<group>"; };
+		6ABB7F63154099D900334EF3 /* NGTimeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGTimeTableCell.m; sourceTree = "<group>"; };
+		6AFFF67815407F7800AA8C77 /* NGVaryingGridViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NGVaryingGridViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AFFF67C15407F7800AA8C77 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6AFFF67E15407F7800AA8C77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6AFFF68015407F7800AA8C77 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6AFFF68415407F7800AA8C77 /* NGVaryingGridViewDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NGVaryingGridViewDemo-Info.plist"; sourceTree = "<group>"; };
+		6AFFF68615407F7800AA8C77 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6AFFF68815407F7800AA8C77 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6AFFF68A15407F7800AA8C77 /* NGVaryingGridViewDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NGVaryingGridViewDemo-Prefix.pch"; sourceTree = "<group>"; };
+		6AFFF68B15407F7800AA8C77 /* NGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NGAppDelegate.h; sourceTree = "<group>"; };
+		6AFFF68C15407F7800AA8C77 /* NGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NGAppDelegate.m; sourceTree = "<group>"; };
+		6AFFF68E15407F7800AA8C77 /* NGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NGViewController.h; sourceTree = "<group>"; };
+		6AFFF68F15407F7800AA8C77 /* NGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NGViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6AFFF67515407F7800AA8C77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ABB7F37154080A700334EF3 /* libNGVaryingGridView.a in Frameworks */,
+				6AFFF67D15407F7800AA8C77 /* UIKit.framework in Frameworks */,
+				6AFFF67F15407F7800AA8C77 /* Foundation.framework in Frameworks */,
+				6AFFF68115407F7800AA8C77 /* CoreGraphics.framework in Frameworks */,
+				6ABB7F61154096F000334EF3 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6ABB7F261540808800334EF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6ABB7F2A1540808800334EF3 /* libNGVaryingGridView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6AFFF66D15407F7800AA8C77 = {
+			isa = PBXGroup;
+			children = (
+				6AFFF68215407F7800AA8C77 /* NGVaryingGridViewDemo */,
+				6AFFF67B15407F7800AA8C77 /* Frameworks */,
+				6AFFF67915407F7800AA8C77 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6AFFF67915407F7800AA8C77 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6AFFF67815407F7800AA8C77 /* NGVaryingGridViewDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6AFFF67B15407F7800AA8C77 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6ABB7F251540808800334EF3 /* NGVaryingGridView.xcodeproj */,
+				6AFFF67C15407F7800AA8C77 /* UIKit.framework */,
+				6AFFF67E15407F7800AA8C77 /* Foundation.framework */,
+				6AFFF68015407F7800AA8C77 /* CoreGraphics.framework */,
+				6ABB7F60154096F000334EF3 /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6AFFF68215407F7800AA8C77 /* NGVaryingGridViewDemo */ = {
+			isa = PBXGroup;
+			children = (
+				6AFFF68B15407F7800AA8C77 /* NGAppDelegate.h */,
+				6AFFF68C15407F7800AA8C77 /* NGAppDelegate.m */,
+				6AFFF68E15407F7800AA8C77 /* NGViewController.h */,
+				6AFFF68F15407F7800AA8C77 /* NGViewController.m */,
+				6AFFF68315407F7800AA8C77 /* Supporting Files */,
+				6ABB7F62154099D900334EF3 /* NGTimeTableCell.h */,
+				6ABB7F63154099D900334EF3 /* NGTimeTableCell.m */,
+			);
+			path = NGVaryingGridViewDemo;
+			sourceTree = "<group>";
+		};
+		6AFFF68315407F7800AA8C77 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6AFFF68415407F7800AA8C77 /* NGVaryingGridViewDemo-Info.plist */,
+				6AFFF68515407F7800AA8C77 /* InfoPlist.strings */,
+				6AFFF68815407F7800AA8C77 /* main.m */,
+				6AFFF68A15407F7800AA8C77 /* NGVaryingGridViewDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6AFFF67715407F7800AA8C77 /* NGVaryingGridViewDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AFFF69915407F7800AA8C77 /* Build configuration list for PBXNativeTarget "NGVaryingGridViewDemo" */;
+			buildPhases = (
+				6AFFF67415407F7800AA8C77 /* Sources */,
+				6AFFF67515407F7800AA8C77 /* Frameworks */,
+				6AFFF67615407F7800AA8C77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6ABB7F36154080A300334EF3 /* PBXTargetDependency */,
+			);
+			name = NGVaryingGridViewDemo;
+			productName = NGVaryingGridViewDemo;
+			productReference = 6AFFF67815407F7800AA8C77 /* NGVaryingGridViewDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6AFFF66F15407F7800AA8C77 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = NG;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "NOUS Wissensmanagement GmbH";
+			};
+			buildConfigurationList = 6AFFF67215407F7800AA8C77 /* Build configuration list for PBXProject "NGVaryingGridViewDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6AFFF66D15407F7800AA8C77;
+			productRefGroup = 6AFFF67915407F7800AA8C77 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6ABB7F261540808800334EF3 /* Products */;
+					ProjectRef = 6ABB7F251540808800334EF3 /* NGVaryingGridView.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				6AFFF67715407F7800AA8C77 /* NGVaryingGridViewDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6ABB7F2A1540808800334EF3 /* libNGVaryingGridView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libNGVaryingGridView.a;
+			remoteRef = 6ABB7F291540808800334EF3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6AFFF67615407F7800AA8C77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AFFF68715407F7800AA8C77 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6AFFF67415407F7800AA8C77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AFFF68915407F7800AA8C77 /* main.m in Sources */,
+				6AFFF68D15407F7800AA8C77 /* NGAppDelegate.m in Sources */,
+				6AFFF69015407F7800AA8C77 /* NGViewController.m in Sources */,
+				6ABB7F64154099D900334EF3 /* NGTimeTableCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6ABB7F36154080A300334EF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NGVaryingGridView;
+			targetProxy = 6ABB7F35154080A300334EF3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6AFFF68515407F7800AA8C77 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AFFF68615407F7800AA8C77 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6AFFF69715407F7800AA8C77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6AFFF69815407F7800AA8C77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6AFFF69A15407F7800AA8C77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NGVaryingGridViewDemo/NGVaryingGridViewDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../NGVaryingGridView/**";
+				INFOPLIST_FILE = "NGVaryingGridViewDemo/NGVaryingGridViewDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6AFFF69B15407F7800AA8C77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NGVaryingGridViewDemo/NGVaryingGridViewDemo-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../NGVaryingGridView/**";
+				INFOPLIST_FILE = "NGVaryingGridViewDemo/NGVaryingGridViewDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6AFFF67215407F7800AA8C77 /* Build configuration list for PBXProject "NGVaryingGridViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AFFF69715407F7800AA8C77 /* Debug */,
+				6AFFF69815407F7800AA8C77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AFFF69915407F7800AA8C77 /* Build configuration list for PBXNativeTarget "NGVaryingGridViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AFFF69A15407F7800AA8C77 /* Debug */,
+				6AFFF69B15407F7800AA8C77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6AFFF66F15407F7800AA8C77 /* Project object */;
+}
