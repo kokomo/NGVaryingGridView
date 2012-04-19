@@ -32,7 +32,6 @@
 @synthesize scrollView = _scrollView;
 @synthesize scrollViewDelegate = _scrollViewDelegate;
 @synthesize gridViewDelegate = _gridViewDelegate;
-@synthesize cellWidth = _cellWidth;
 @synthesize gridCells = _gridCells;
 @synthesize maximumContentWidth = _maximumContentWidth;
 @synthesize maximumContentHeight = _maximumContentHeight;
@@ -219,9 +218,6 @@
             UIView *gridViewCell = [self.gridCells objectForKey:rectValue];
             if (gridViewCell == nil) {
                 gridViewCell = [self.gridViewDelegate gridView:self viewForCellWithRect:rectOfValue index:index];
-                if (gridViewCell.frame.size.width != self.cellWidth) {
-                    gridViewCell.frame = CGRectMake(gridViewCell.frame.origin.x, gridViewCell.frame.origin.y, self.cellWidth, gridViewCell.frame.size.height);
-                }
                 [gridViewCell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
                 [self.gridCells setObject:gridViewCell forKey:rectValue];
             }

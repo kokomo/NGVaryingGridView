@@ -44,7 +44,6 @@ typedef enum {
 
 @property (nonatomic, unsafe_unretained) id <NGVaryingGridViewDelegate> gridViewDelegate;
 @property (nonatomic, unsafe_unretained) id <UIScrollViewDelegate> scrollViewDelegate;
-@property (nonatomic) CGFloat cellWidth;
 @property (nonatomic) CGFloat maximumContentWidth;
 @property (nonatomic) CGFloat maximumContentHeight;
 @property (nonatomic, readonly) CGRect visibleRect;
