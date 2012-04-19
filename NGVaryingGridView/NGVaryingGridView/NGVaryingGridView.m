@@ -23,6 +23,7 @@
 - (void)loadCellsInRect:(CGRect)rect;
 - (void)handleTap:(UIGestureRecognizer *)gestureRecognizer;
 - (void)updateStickyViewsPosition;
+- (void)bringScrollingIndicatorsToFront;
 
 @end
 
@@ -84,7 +85,7 @@
     [super layoutSubviews];
     
     [self loadCellsInRect:self.visibleRect];
-    [self updateStickyViewsPosition];
+    [self bringScrollingIndicatorsToFront];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -110,7 +111,7 @@
         for (NSValue *rectValue in self.gridRects) {
             CGRect rect = [rectValue CGRectValue];
             maxX = MAX(maxX, rect.origin.x + rect.size.width);
-            maxY = MAX(maxY, rect.origin.y + rect.size.width);
+            maxY = MAX(maxY, rect.origin.y + rect.size.height);
         }
         maxX = MIN(maxX, self.maximumContentWidth);
         maxY = MIN(maxY, self.maximumContentHeight);
@@ -162,6 +163,22 @@
 
 - (void)setDirectionalLockEnabled:(BOOL)directionalLockEnabled {
     self.scrollView.directionalLockEnabled = directionalLockEnabled;
+}
+
+- (void)setShowsVerticalScrollIndicator:(BOOL)showsVerticalScrollIndicator {
+    self.scrollView.showsVerticalScrollIndicator = showsVerticalScrollIndicator;
+}
+
+- (BOOL)showsVerticalScrollIndicator {
+    return self.scrollView.showsVerticalScrollIndicator;
+}
+
+- (void)setShowsHorizontalScrollIndicator:(BOOL)showsHorizontalScrollIndicator {
+    self.scrollView.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator;
+}
+
+- (BOOL)showsHorizontalScrollIndicator {
+    return self.scrollView.showsHorizontalScrollIndicator;
 }
 
 - (void)setStickyView:(UIView *)view lockPosition:(NGVaryingGridViewLockPosition)lockPosition {
@@ -221,10 +238,6 @@
     
     [self.gridCells removeObjectsForKeys:unusedCells.allKeys];
     [self.reuseableCells addObjectsFromArray:unusedCells.allValues];
-    
-    // ScrollIndicator will hide underneath view when you are adding Subviews while Scrolling
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.showsVerticalScrollIndicator = YES;
 }
 
 - (UIView *)dequeueReusableCell {
@@ -246,6 +259,19 @@
     [self.scrollView bringSubviewToFront:self.stickyViewForLeftPosition];
 }
 
+- (void)bringScrollingIndicatorsToFront {
+    // ScrollIndicator will hide underneath view when you are adding Subviews while Scrolling
+    if (self.showsHorizontalScrollIndicator) {
+        self.scrollView.showsHorizontalScrollIndicator = NO;
+        self.scrollView.showsHorizontalScrollIndicator = YES;
+    }
+    
+    if (self.showsVerticalScrollIndicator) {
+        self.scrollView.showsVerticalScrollIndicator = NO;
+        self.scrollView.showsVerticalScrollIndicator = YES;
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - UIScrollViewDelegate
 ////////////////////////////////////////////////////////////////////////
@@ -257,6 +283,7 @@
     
     [self loadCellsInRect:self.visibleRect];
     [self updateStickyViewsPosition];
+    [self bringScrollingIndicatorsToFront];
 }
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     if ([self.scrollViewDelegate respondsToSelector:@selector(scrollViewDidZoom:)]) {

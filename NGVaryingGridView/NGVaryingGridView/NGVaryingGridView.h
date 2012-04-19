@@ -49,6 +49,8 @@ typedef enum {
 @property (nonatomic) CGFloat maximumContentHeight;
 @property (nonatomic, readonly) CGRect visibleRect;
 @property(nonatomic, getter=isDirectionalLockEnabled) BOOL directionalLockEnabled;
+@property (nonatomic) BOOL showsHorizontalScrollIndicator;
+@property (nonatomic) BOOL showsVerticalScrollIndicator;
 
 /**
  Reloads the rows and sections of the receiver.
