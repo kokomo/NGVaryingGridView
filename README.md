@@ -6,7 +6,7 @@ A GridView which allows to set individual Rects for the Cells. So you can define
 
 Sticky Views are also supported on top of the GridView and on the left side.
 
--><img src="http://office.nousguide.com/github/NGVaryingGridView.png" alt="NGVaryingGridView" title="NGVaryingGridView" title" style="display:block; margin:20px;" class="center"><-
+<img src="http://office.nousguide.com/github/NGVaryingGridView.png" alt="NGVaryingGridView" title="NGVaryingGridView" title" style="display:block; margin:20px;" class="center">
 
 
 
