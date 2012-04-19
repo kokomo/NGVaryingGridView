@@ -11,6 +11,7 @@
 @interface NGVaryingGridView () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *gridCells;
+@property (nonatomic, strong) NSMutableSet *reuseableCells;
 @property (nonatomic, strong) NSArray *gridRects;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -28,6 +29,7 @@
 @synthesize gridCells = _gridCells;
 @synthesize maximumContentWidth = _maximumContentWidth;
 @synthesize gridRects = _gridRects;
+@synthesize reuseableCells = _reuseableCells;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Life Cycle
@@ -40,6 +42,7 @@
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _gridCells = [NSMutableDictionary dictionary];
+        _reuseableCells = [NSMutableSet set];
         
         [super addSubview:_scrollView];
         _scrollView.delegate = self;
@@ -112,6 +115,7 @@
 
 - (void)loadCellsInRect:(CGRect)rect {
     NSUInteger index = 0;
+    NSMutableDictionary *usedCells = [NSMutableDictionary dictionary];
     for (NSValue *rectValue in self.gridRects) {
         CGRect rectOfValue = [rectValue CGRectValue];
         if (!CGRectIsEmpty(CGRectIntersection(rect, rectOfValue))) {
@@ -122,13 +126,19 @@
                     gridViewCell.frame = CGRectMake(gridViewCell.frame.origin.x, gridViewCell.frame.origin.y, self.cellWidth, gridViewCell.frame.size.height);
                 }
                 [gridViewCell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
-                [self.gridCells setObject:gridViewCell forKey:rectValue];
+                [usedCells setObject:gridViewCell forKey:rectValue];
             }
             
             [self.scrollView addSubview:gridViewCell];
         }
         index ++;
     }
+    
+    // Move unused Cells to reusableCells
+    NSMutableArray *unusedCells = [NSMutableArray arrayWithArray:self.gridCells.allValues];
+    [unusedCells removeObjectsInArray:usedCells.allValues];
+    self.gridCells = usedCells;
+    [self.reuseableCells addObjectsFromArray:unusedCells];
 }
 
 - (UIView *)gridCellWithCGPoint:(CGPoint)point {
