@@ -65,4 +65,10 @@
  */
 - (void)addOverlayView:(UIView *)overlayView;
 
+/**
+ Returns a reusable Cell
+ @return the GridCell for reuse or `nil` if no reusable Cell is available
+ */
+- (UIView *)dequeueReusableCell;
+
 @end

@@ -100,10 +100,6 @@
         self.scrollView.contentSize = CGSizeMake(maxX, maxY);
         
         [self loadCellsInRect:self.visibleRect];
-        
-        // ScrollIndicator will hide underneath view when you are adding Subviews while Scrolling
-        self.scrollView.showsVerticalScrollIndicator = NO;
-        self.scrollView.showsVerticalScrollIndicator = YES;
     }
 }
 
@@ -126,19 +122,36 @@
                     gridViewCell.frame = CGRectMake(gridViewCell.frame.origin.x, gridViewCell.frame.origin.y, self.cellWidth, gridViewCell.frame.size.height);
                 }
                 [gridViewCell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
-                [usedCells setObject:gridViewCell forKey:rectValue];
+                [self.gridCells setObject:gridViewCell forKey:rectValue];
             }
             
+            [usedCells setObject:gridViewCell forKey:rectValue];
             [self.scrollView addSubview:gridViewCell];
         }
         index ++;
     }
     
     // Move unused Cells to reusableCells
-    NSMutableArray *unusedCells = [NSMutableArray arrayWithArray:self.gridCells.allValues];
-    [unusedCells removeObjectsInArray:usedCells.allValues];
-    self.gridCells = usedCells;
-    [self.reuseableCells addObjectsFromArray:unusedCells];
+    NSMutableDictionary *unusedCells = [NSMutableDictionary dictionaryWithDictionary:self.gridCells];
+    [unusedCells removeObjectsForKeys:usedCells.allKeys];
+    
+    [self.gridCells removeObjectsForKeys:unusedCells.allKeys];
+    [self.reuseableCells addObjectsFromArray:unusedCells.allValues];
+    
+    // ScrollIndicator will hide underneath view when you are adding Subviews while Scrolling
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = YES;
+}
+
+- (UIView *)dequeueReusableCell {
+    UIView *reusableCell = [self.reuseableCells anyObject];
+    if (reusableCell) {
+        if ([self.gridViewDelegate respondsToSelector:@selector(gridView:willPrepareCellForReuse:)]) {
+            [self.gridViewDelegate gridView:self willPrepareCellForReuse:reusableCell];
+        }
+        [self.reuseableCells removeObject:reusableCell];
+    }
+    return reusableCell;
 }
 
 - (UIView *)gridCellWithCGPoint:(CGPoint)point {
