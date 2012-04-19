@@ -10,10 +10,10 @@
 
 @interface NGVaryingGridView () <UIScrollViewDelegate>
 
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) NSArray *gridRects;
 @property (nonatomic, strong) NSMutableDictionary *gridCells;
 @property (nonatomic, strong) NSMutableSet *reuseableCells;
-@property (nonatomic, strong) NSArray *gridRects;
-@property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, strong) UIView *stickyViewForTopPosition;
 @property (nonatomic, strong) UIView *stickyViewForLeftPosition;
@@ -29,14 +29,16 @@
 
 @implementation NGVaryingGridView
 
-@synthesize scrollView = _scrollView;
 @synthesize scrollViewDelegate = _scrollViewDelegate;
 @synthesize gridViewDelegate = _gridViewDelegate;
+@synthesize scrollView = _scrollView;
+@synthesize gridRects = _gridRects;
 @synthesize gridCells = _gridCells;
+@synthesize reuseableCells = _reuseableCells;
+
 @synthesize maximumContentWidth = _maximumContentWidth;
 @synthesize maximumContentHeight = _maximumContentHeight;
-@synthesize gridRects = _gridRects;
-@synthesize reuseableCells = _reuseableCells;
+
 @synthesize stickyViewForTopPosition = _stickyViewForTopPosition;
 @synthesize stickyViewForLeftPosition = _stickyViewForLeftPosition;
 @synthesize stickyViewForLeftPositionPadding = _stickyViewForLeftPositionPadding;
@@ -57,7 +59,6 @@
         _reuseableCells = [NSMutableSet set];
         _maximumContentHeight = CGFLOAT_MAX;
         _maximumContentWidth = CGFLOAT_MAX;
-        
         
         [super addSubview:_scrollView];
         _scrollView.delegate = self;
@@ -105,6 +106,7 @@
         
         self.gridRects = [self.gridViewDelegate rectsForCellsInGridView:self];
         [self.gridCells.allValues makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [self.reuseableCells addObjectsFromArray:self.gridCells.allValues];
         [self.gridCells removeAllObjects];
         
         for (NSValue *rectValue in self.gridRects) {
@@ -130,64 +132,20 @@
     return nil;
 }
 
-- (void)scrollToGridCell:(UIView *)cell animated:(BOOL)animated {
-    [self.scrollView scrollRectToVisible:cell.frame animated:animated];
-}
-
-- (CGRect)visibleRect {
-    CGRect visibleRect;
-    visibleRect.origin = self.scrollView.contentOffset;
-    visibleRect.size = self.scrollView.bounds.size;
-    
-    float scale = 1.0 / self.scrollView.zoomScale;
-    visibleRect.origin.x *= scale;
-    visibleRect.origin.y *= scale;
-    visibleRect.size.width *= scale;
-    visibleRect.size.height *= scale;
-    
-    return visibleRect;
-}
-
 - (void)addOverlayView:(UIView *)overlayView {
     [super addSubview:overlayView];
-}
-
-- (void)addSubview:(UIView *)view {
-    [self.scrollView addSubview:view];
-}
-
-- (BOOL)isDirectionalLockEnabled {
-    return self.scrollView.isDirectionalLockEnabled;
-}
-
-- (void)setDirectionalLockEnabled:(BOOL)directionalLockEnabled {
-    self.scrollView.directionalLockEnabled = directionalLockEnabled;
-}
-
-- (void)setShowsVerticalScrollIndicator:(BOOL)showsVerticalScrollIndicator {
-    self.scrollView.showsVerticalScrollIndicator = showsVerticalScrollIndicator;
-}
-
-- (BOOL)showsVerticalScrollIndicator {
-    return self.scrollView.showsVerticalScrollIndicator;
-}
-
-- (void)setShowsHorizontalScrollIndicator:(BOOL)showsHorizontalScrollIndicator {
-    self.scrollView.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator;
-}
-
-- (BOOL)showsHorizontalScrollIndicator {
-    return self.scrollView.showsHorizontalScrollIndicator;
 }
 
 - (void)setStickyView:(UIView *)view lockPosition:(NGVaryingGridViewLockPosition)lockPosition {
     switch (lockPosition) {
         case NGVaryingGridViewLockPositionTop:
+            [self.stickyViewForTopPosition removeFromSuperview];
             self.stickyViewForTopPositionPadding = view.frame.origin.y;
             self.stickyViewForTopPosition = view;
             break;
             
         case NGVaryingGridViewLockPositionLeft:
+            [self.stickyViewForLeftPosition removeFromSuperview];
             self.stickyViewForLeftPositionPadding = view.frame.origin.x;
             self.stickyViewForLeftPosition = view;
             break;
@@ -266,6 +224,56 @@
         self.scrollView.showsVerticalScrollIndicator = NO;
         self.scrollView.showsVerticalScrollIndicator = YES;
     }
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - UIScrolLView Forwarding
+////////////////////////////////////////////////////////////////////////
+
+- (void)scrollToGridCell:(UIView *)cell animated:(BOOL)animated {
+    [self.scrollView scrollRectToVisible:cell.frame animated:animated];
+}
+
+- (CGRect)visibleRect {
+    CGRect visibleRect;
+    visibleRect.origin = self.scrollView.contentOffset;
+    visibleRect.size = self.scrollView.bounds.size;
+    
+    float scale = 1.0 / self.scrollView.zoomScale;
+    visibleRect.origin.x *= scale;
+    visibleRect.origin.y *= scale;
+    visibleRect.size.width *= scale;
+    visibleRect.size.height *= scale;
+    
+    return visibleRect;
+}
+
+- (void)addSubview:(UIView *)view {
+    [self.scrollView addSubview:view];
+}
+
+- (BOOL)isDirectionalLockEnabled {
+    return self.scrollView.isDirectionalLockEnabled;
+}
+
+- (void)setDirectionalLockEnabled:(BOOL)directionalLockEnabled {
+    self.scrollView.directionalLockEnabled = directionalLockEnabled;
+}
+
+- (void)setShowsVerticalScrollIndicator:(BOOL)showsVerticalScrollIndicator {
+    self.scrollView.showsVerticalScrollIndicator = showsVerticalScrollIndicator;
+}
+
+- (BOOL)showsVerticalScrollIndicator {
+    return self.scrollView.showsVerticalScrollIndicator;
+}
+
+- (void)setShowsHorizontalScrollIndicator:(BOOL)showsHorizontalScrollIndicator {
+    self.scrollView.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator;
+}
+
+- (BOOL)showsHorizontalScrollIndicator {
+    return self.scrollView.showsHorizontalScrollIndicator;
 }
 
 ////////////////////////////////////////////////////////////////////////
