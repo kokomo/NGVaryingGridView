@@ -28,6 +28,15 @@
 @end 
 
 ////////////////////////////////////////////////////////////////////////
+#pragma mark - NGVaryingGridViewLockPosition
+////////////////////////////////////////////////////////////////////////
+
+typedef enum {
+    NGVaryingGridViewLockPositionTop = 0,
+    NGVaryingGridViewLockPositionLeft
+} NGVaryingGridViewLockPosition;
+
+////////////////////////////////////////////////////////////////////////
 #pragma mark - NGVaryingGridView
 ////////////////////////////////////////////////////////////////////////
 
@@ -37,6 +46,7 @@
 @property (nonatomic, unsafe_unretained) id <UIScrollViewDelegate> scrollViewDelegate;
 @property (nonatomic) CGFloat cellWidth;
 @property (nonatomic) CGFloat maximumContentWidth;
+@property (nonatomic) CGFloat maximumContentHeight;
 @property (nonatomic, readonly) CGRect visibleRect;
 @property(nonatomic, getter=isDirectionalLockEnabled) BOOL directionalLockEnabled;
 
@@ -70,5 +80,12 @@
  @return the GridCell for reuse or `nil` if no reusable Cell is available
  */
 - (UIView *)dequeueReusableCell;
+
+/**
+ Sets a sticky View to the scrollable Area at a specific Lockposition
+ @param view the sticky View
+ @param lockPosition a `NGVaryingGridViewLockPosition` which defines the sticky Lockposition
+ */
+- (void)setStickyView:(UIView *)view lockPosition:(NGVaryingGridViewLockPosition)lockPosition;
 
 @end

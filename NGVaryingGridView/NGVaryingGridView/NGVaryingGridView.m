@@ -15,8 +15,14 @@
 @property (nonatomic, strong) NSArray *gridRects;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
+@property (nonatomic, strong) UIView *stickyViewForTopPosition;
+@property (nonatomic, strong) UIView *stickyViewForLeftPosition;
+@property (nonatomic) CGFloat stickyViewForTopPositionPadding;
+@property (nonatomic) CGFloat stickyViewForLeftPositionPadding;
+
 - (void)loadCellsInRect:(CGRect)rect;
 - (void)handleTap:(UIGestureRecognizer *)gestureRecognizer;
+- (void)updateStickyViewsPosition;
 
 @end
 
@@ -28,8 +34,13 @@
 @synthesize cellWidth = _cellWidth;
 @synthesize gridCells = _gridCells;
 @synthesize maximumContentWidth = _maximumContentWidth;
+@synthesize maximumContentHeight = _maximumContentHeight;
 @synthesize gridRects = _gridRects;
 @synthesize reuseableCells = _reuseableCells;
+@synthesize stickyViewForTopPosition = _stickyViewForTopPosition;
+@synthesize stickyViewForLeftPosition = _stickyViewForLeftPosition;
+@synthesize stickyViewForLeftPositionPadding = _stickyViewForLeftPositionPadding;
+@synthesize stickyViewForTopPositionPadding = _stickyViewForTopPositionPadding;
 
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - Life Cycle
@@ -41,8 +52,12 @@
     if (self) {
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _scrollView.directionalLockEnabled = YES;
         _gridCells = [NSMutableDictionary dictionary];
         _reuseableCells = [NSMutableSet set];
+        _maximumContentHeight = CGFLOAT_MAX;
+        _maximumContentWidth = CGFLOAT_MAX;
+        
         
         [super addSubview:_scrollView];
         _scrollView.delegate = self;
@@ -69,6 +84,7 @@
     [super layoutSubviews];
     
     [self loadCellsInRect:self.visibleRect];
+    [self updateStickyViewsPosition];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -96,12 +112,80 @@
             maxX = MAX(maxX, rect.origin.x + rect.size.width);
             maxY = MAX(maxY, rect.origin.y + rect.size.width);
         }
-        maxX = MIN(maxX, _maximumContentWidth);
+        maxX = MIN(maxX, self.maximumContentWidth);
+        maxY = MIN(maxY, self.maximumContentHeight);
         self.scrollView.contentSize = CGSizeMake(maxX, maxY);
         
         [self loadCellsInRect:self.visibleRect];
     }
 }
+
+- (UIView *)gridCellWithCGPoint:(CGPoint)point {
+    for (UIView *view in self.gridCells.allValues) {
+        if (CGRectContainsPoint(view.frame, point)) {
+            return view;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)scrollToGridCell:(UIView *)cell animated:(BOOL)animated {
+    [self.scrollView scrollRectToVisible:cell.frame animated:animated];
+}
+
+- (CGRect)visibleRect {
+    CGRect visibleRect;
+    visibleRect.origin = self.scrollView.contentOffset;
+    visibleRect.size = self.scrollView.bounds.size;
+    
+    float scale = 1.0 / self.scrollView.zoomScale;
+    visibleRect.origin.x *= scale;
+    visibleRect.origin.y *= scale;
+    visibleRect.size.width *= scale;
+    visibleRect.size.height *= scale;
+    
+    return visibleRect;
+}
+
+- (void)addOverlayView:(UIView *)overlayView {
+    [super addSubview:overlayView];
+}
+
+- (void)addSubview:(UIView *)view {
+    [self.scrollView addSubview:view];
+}
+
+- (BOOL)isDirectionalLockEnabled {
+    return self.scrollView.isDirectionalLockEnabled;
+}
+
+- (void)setDirectionalLockEnabled:(BOOL)directionalLockEnabled {
+    self.scrollView.directionalLockEnabled = directionalLockEnabled;
+}
+
+- (void)setStickyView:(UIView *)view lockPosition:(NGVaryingGridViewLockPosition)lockPosition {
+    switch (lockPosition) {
+        case NGVaryingGridViewLockPositionTop:
+            self.stickyViewForTopPositionPadding = view.frame.origin.y;
+            self.stickyViewForTopPosition = view;
+            break;
+            
+        case NGVaryingGridViewLockPositionLeft:
+            self.stickyViewForLeftPositionPadding = view.frame.origin.x;
+            self.stickyViewForLeftPosition = view;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self.scrollView addSubview:view];
+}
+
+////////////////////////////////////////////////////////////////////////
+#pragma mark - PVTVGridView (Private Methods)
+////////////////////////////////////////////////////////////////////////
 
 - (void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
     if ([self.gridViewDelegate respondsToSelector:@selector(gridView:didSelectCell:index:)]) {
@@ -154,48 +238,12 @@
     return reusableCell;
 }
 
-- (UIView *)gridCellWithCGPoint:(CGPoint)point {
-    for (UIView *view in self.gridCells.allValues) {
-        if (CGRectContainsPoint(view.frame, point)) {
-            return view;
-        }
-    }
+- (void)updateStickyViewsPosition {
+    self.stickyViewForTopPosition.frame = CGRectMake(self.stickyViewForTopPosition.frame.origin.x, self.scrollView.contentOffset.y + self.stickyViewForTopPositionPadding, self.stickyViewForTopPosition.frame.size.width, self.stickyViewForTopPosition.frame.size.height);
+    self.stickyViewForLeftPosition.frame = CGRectMake(self.scrollView.contentOffset.x + self.stickyViewForLeftPositionPadding, self.stickyViewForLeftPosition.frame.origin.y, self.stickyViewForLeftPosition.frame.size.width, self.stickyViewForLeftPosition.frame.size.height);
     
-    return nil;
-}
-
-- (void)scrollToGridCell:(UIView *)cell animated:(BOOL)animated {
-    [self.scrollView scrollRectToVisible:cell.frame animated:animated];
-}
-
-- (CGRect)visibleRect {
-    CGRect visibleRect;
-    visibleRect.origin = self.scrollView.contentOffset;
-    visibleRect.size = self.scrollView.bounds.size;
-    
-    float scale = 1.0 / self.scrollView.zoomScale;
-    visibleRect.origin.x *= scale;
-    visibleRect.origin.y *= scale;
-    visibleRect.size.width *= scale;
-    visibleRect.size.height *= scale;
-    
-    return visibleRect;
-}
-
-- (void)addOverlayView:(UIView *)overlayView {
-    [super addSubview:overlayView];
-}
-
-- (void)addSubview:(UIView *)view {
-    [self.scrollView addSubview:view];
-}
-
-- (BOOL)isDirectionalLockEnabled {
-    return self.scrollView.isDirectionalLockEnabled;
-}
-
-- (void)setDirectionalLockEnabled:(BOOL)directionalLockEnabled {
-    self.scrollView.directionalLockEnabled = directionalLockEnabled;
+    [self.scrollView bringSubviewToFront:self.stickyViewForTopPosition];
+    [self.scrollView bringSubviewToFront:self.stickyViewForLeftPosition];
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -208,6 +256,7 @@
     }
     
     [self loadCellsInRect:self.visibleRect];
+    [self updateStickyViewsPosition];
 }
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     if ([self.scrollViewDelegate respondsToSelector:@selector(scrollViewDidZoom:)]) {
