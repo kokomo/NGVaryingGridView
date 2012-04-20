@@ -120,6 +120,7 @@
         self.scrollView.contentSize = CGSizeMake(maxX, maxY);
         
         [self loadCellsInRect:self.visibleRect];
+        [self updateStickyViewsPosition];
     }
 }
 
