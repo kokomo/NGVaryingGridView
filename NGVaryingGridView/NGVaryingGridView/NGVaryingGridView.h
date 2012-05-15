@@ -50,6 +50,8 @@ typedef enum {
 @property(nonatomic, getter=isDirectionalLockEnabled) BOOL directionalLockEnabled;
 @property (nonatomic) BOOL showsHorizontalScrollIndicator;
 @property (nonatomic) BOOL showsVerticalScrollIndicator;
+@property (nonatomic) UIEdgeInsets contentInset;
+@property (nonatomic) CGPoint contentOffset;
 
 /**
  Reloads the rows and sections of the receiver.

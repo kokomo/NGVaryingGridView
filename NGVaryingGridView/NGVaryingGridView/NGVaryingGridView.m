@@ -278,6 +278,22 @@
     return self.scrollView.showsHorizontalScrollIndicator;
 }
 
+- (void)setContentInset:(UIEdgeInsets)contentInset {
+    self.scrollView.contentInset = contentInset;
+}
+
+- (UIEdgeInsets)contentInset {
+    return self.scrollView.contentInset;
+}
+
+- (void)setContentOffset:(CGPoint)contentOffset {
+    self.scrollView.contentOffset = contentOffset;
+}
+
+- (CGPoint)contentOffset {
+    return self.scrollView.contentOffset;
+}
+
 ////////////////////////////////////////////////////////////////////////
 #pragma mark - UIScrollViewDelegate
 ////////////////////////////////////////////////////////////////////////
